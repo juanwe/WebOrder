@@ -13,7 +13,8 @@ CREATE TABLE Product (
                          Description TEXT,                          -- 商品描述
                          Shipping DECIMAL(10, 2),                   -- 运费
                          Weight DECIMAL(10,2),                      -- 重量
-                         Image VARCHAR(255)                         -- 商品图片存放位置
+                         Image VARCHAR(255),                        -- 商品图片存放位置
+                         Stock INT                                  -- 库存数量
 );
 
 -- 购物篮表
