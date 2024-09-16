@@ -19,13 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	private final UserDetailsService userDetailsService;
-	private final JwtAuthenticationFilter jwtAuthenticationFilter;
-	private final JwtAuthorizationFilter jwtAuthorizationFilter;
 	
-	public SecurityConfig(UserDetailsService userDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter, JwtAuthorizationFilter jwtAuthorizationFilter) {
+	public SecurityConfig(UserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
-		this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-		this.jwtAuthorizationFilter = jwtAuthorizationFilter;
 	}
 	
 	@Override
@@ -35,9 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/users/register", "/api/users/login").permitAll() // 允许注册和登录接口公开
 				.anyRequest().authenticated() // 其他请求需要认证
 				.and()
-				.addFilter(jwtAuthenticationFilter) // 添加JWT认证过滤器
-				.addFilter(jwtAuthorizationFilter) // 添加JWT授权过滤器
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 不使用session，改用JWT
+				.addFilter(new JwtAuthenticationFilter(authenticationManager())) // 添加JWT认证过滤器
+				.addFilter(new JwtAuthorizationFilter(authenticationManager())) // 添加JWT授权过滤器
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 使用JWT
 	}
 	
 	@Override
