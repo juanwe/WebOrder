@@ -4,6 +4,7 @@ import com.weborder.dao.UserAccountMapper;
 import com.weborder.entity.UserAccount;
 import com.weborder.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,14 +13,17 @@ import java.util.List;
 public class UserAccountServiceImpl implements UserAccountService {
 	
 	private final UserAccountMapper userAccountMapper;
+	private final PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	public UserAccountServiceImpl(UserAccountMapper userAccountMapper) {
+	public UserAccountServiceImpl(UserAccountMapper userAccountMapper,PasswordEncoder passwordEncoder) {
 		this.userAccountMapper = userAccountMapper;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 	@Override
 	public void createUser(UserAccount userAccount) {
+		userAccount.setPassword(passwordEncoder.encode(userAccount.getPassword()));
 		userAccountMapper.insertUser(userAccount);
 	}
 	

@@ -14,18 +14,15 @@ import java.util.List;
 public class UserAccountController {
 	
 	private final UserAccountService userAccountService;
-	private final PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	public UserAccountController(UserAccountService userAccountService,PasswordEncoder passwordEncoder) {
+	public UserAccountController(UserAccountService userAccountService) {
 		this.userAccountService = userAccountService;
-		this.passwordEncoder = passwordEncoder;
 	}
 	
 	// 用户注册
 	@PostMapping("/register")
 	public ResponseEntity<Void> createUser(@RequestBody UserAccount userAccount) {
-		userAccount.setPassword(passwordEncoder.encode(userAccount.getPassword()));
 		userAccountService.createUser(userAccount);
 		return ResponseEntity.ok().build();
 	}
