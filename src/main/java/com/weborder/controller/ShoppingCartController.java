@@ -58,4 +58,10 @@ public class ShoppingCartController {
 		shoppingCartService.clearCart(cartId);
 		return ResponseEntity.ok().build();
 	}
+	
+	// 删除购物车
+	@DeleteMapping("/{cartId}/delete")
+	public void deleteCart(@PathVariable Integer cartId){
+		shoppingCartService.deleteCart(cartId);
+	}
 }

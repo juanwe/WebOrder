@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ReviewService {
 	
+	boolean hasUserReviewedProduct(Integer userId, Integer productId);
+	
 	/**
 	 * 创建新的评价
 	 *

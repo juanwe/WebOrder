@@ -33,6 +33,11 @@ public class UserAccountServiceImpl implements UserAccountService {
 	}
 	
 	@Override
+	public UserAccount getUserByName(String userName) {
+		return userAccountMapper.getUserByName(userName);
+	}
+	
+	@Override
 	public List<UserAccount> getAllUsers() {
 		return userAccountMapper.getAllUsers();
 	}

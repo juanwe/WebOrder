@@ -22,4 +22,8 @@ public interface ReviewMapper {
 	//根据用户ID和产品ID获取用户对产品的评价
 	@Select("SELECT * FROM review where UserID = #{userId} and ProductID= #{productId}")
 	Review getUserReviewForProduct(Integer userId, Integer productId);
+	
+	@Select("SELECT COUNT(*) FROM Review WHERE ProductID = #{productId} AND UserID = #{userId}")
+	int countUserReviewForProduct(@Param("userId") Integer userId, @Param("productId") Integer productId);
+	
 }

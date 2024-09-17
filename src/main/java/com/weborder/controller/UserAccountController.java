@@ -36,14 +36,23 @@ public class UserAccountController {
 	// 用户登录验证
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
-		// 验证用户凭据
-		boolean isValid = userAccountService.validateUserCredentials(username, password);
+		// 获取用户信息
+		UserAccount user = userAccountService.getUserByName(username);
 		
-		if (!isValid) {
-			return ResponseEntity.status(401).body("Invalid credentials");
+		if (user == null) {
+			// 如果用户不存在，返回"未知用户"信息
+			return ResponseEntity.status(401).body("Unknown user");
 		}
 		
-		// 如果用户凭据正确，生成JWT
+		// 验证密码是否正确
+		boolean isValidPassword = user.getPassword().equals(password);
+		
+		if (!isValidPassword) {
+			// 如果密码错误，返回"密码错误"信息
+			return ResponseEntity.status(401).body("Incorrect password");
+		}
+		
+		// 如果用户名和密码正确，生成JWT
 		String token = Jwts.builder()
 				.setSubject(username)
 				.setExpiration(new Date(System.currentTimeMillis() + 864_000_000)) // 10天有效
@@ -53,6 +62,7 @@ public class UserAccountController {
 		// 返回JWT给客户端
 		return ResponseEntity.ok(token);
 	}
+	
 	
 	// 根据ID获取用户信息
 	@GetMapping("/{userId}")

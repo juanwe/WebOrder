@@ -22,6 +22,14 @@ public interface UserAccountService {
 	UserAccount getUserById(Integer userId);
 	
 	/**
+	 * 根据用户名获取用户信息
+	 *
+	 * @param userName 用户ID
+	 * @return 返回用户信息
+	 */
+	UserAccount getUserByName(String userName);
+	
+	/**
 	 * 获取所有用户
 	 *
 	 * @return 返回所有用户的列表

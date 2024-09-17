@@ -38,10 +38,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		shoppingCartMapper.updateCart(cart);
 	}
 	
-	@Override
-	public void deleteCart(Integer cartId) {
-		shoppingCartMapper.deleteCart(cartId);
-	}
 	
 	@Override
 	public List<CartItem> getCartItemsByCartId(Integer cartId) {
@@ -87,4 +83,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		cart.setTotalWeight(0.0);
 		updateCart(cart);
 	}
+	
+	@Override
+	@Transactional
+	public void deleteCart(Integer cartId) {
+		cartItemService.deleteCartItemsByCartId(cartId);
+		shoppingCartMapper.deleteCart(cartId);
+	}
+	
 }

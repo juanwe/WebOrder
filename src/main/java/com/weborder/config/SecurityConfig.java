@@ -18,8 +18,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
+				.exceptionHandling()
+				.authenticationEntryPoint((request, response, authException) -> {
+					response.sendRedirect("/api/users/login");
+				})
+				.and()
 				.authorizeRequests()
-				.antMatchers("/api/users/register", "/api/users/login").permitAll() // 允许注册和登录的请求
+				.antMatchers("/api/users/register", "/api/users/login","/swagger-ui/index.html","/v3/api-docs").permitAll() // 允许注册和登录的请求
 				.anyRequest().authenticated() // 其他所有请求都需要认证
 				.and()
 				.addFilter(new JwtAuthenticationFilter(authenticationManager())); // 添加JWT认证过滤器

@@ -92,6 +92,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.15</version> <!-- 请根据最新版本进行调整 -->
+        </dependency>
+
+
     </dependencies>
 
     <dependencyManagement>

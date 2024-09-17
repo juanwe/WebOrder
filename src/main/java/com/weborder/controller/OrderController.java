@@ -22,7 +22,6 @@ public class OrderController {
 	}
 	
 	// 提交订单
-// 提交订单
 	@PostMapping
 	public ResponseEntity<Void> placeOrder(@RequestBody OrderRequestDTO orderRequest) {
 		orderService.placeOrder(orderRequest.getOrder(), orderRequest.getOrderItems());

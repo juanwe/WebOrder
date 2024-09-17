@@ -18,6 +18,11 @@ public class ReviewServiceImpl implements ReviewService {
 		this.reviewMapper = reviewMapper;
 	}
 	
+	
+	@Override
+	public boolean hasUserReviewedProduct(Integer userId, Integer productId) {
+		return reviewMapper.countUserReviewForProduct(userId, productId) > 0;
+	}
 	@Override
 	public void createReview(Review review) {
 		reviewMapper.insertReview(review);
