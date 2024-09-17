@@ -1,5 +1,6 @@
 package com.weborder.controller;
 
+import com.weborder.dto.OrderRequestDTO;
 import com.weborder.entity.Order;
 import com.weborder.entity.OrderItem;
 import com.weborder.service.OrderService;
@@ -21,9 +22,10 @@ public class OrderController {
 	}
 	
 	// 提交订单
+// 提交订单
 	@PostMapping
-	public ResponseEntity<Void> placeOrder(@RequestBody Order order, @RequestBody List<OrderItem> orderItems) {
-		orderService.placeOrder(order, orderItems);
+	public ResponseEntity<Void> placeOrder(@RequestBody OrderRequestDTO orderRequest) {
+		orderService.placeOrder(orderRequest.getOrder(), orderRequest.getOrderItems());
 		return ResponseEntity.ok().build();
 	}
 	

@@ -70,7 +70,6 @@ public class ProductController {
 	}
 	
 	// 增加产品库存
-	// 未完善的需求
 	@PutMapping("/{productId}/increase-stock")
 	public ResponseEntity<Void> increaseProductStock(@PathVariable Integer productId, @RequestParam Integer quantity) {
 		productService.increaseProductStock(productId, quantity);
