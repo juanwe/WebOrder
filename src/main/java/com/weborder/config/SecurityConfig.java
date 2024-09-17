@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 				.authorizeRequests()
-				.antMatchers("/api/users/register", "/api/users/login","/*").permitAll() // 允许注册和登录的请求
+				.antMatchers("/api/users/register", "/api/users/login").permitAll() // 允许注册和登录的请求
 				.anyRequest().authenticated() // 其他所有请求都需要认证
 				.and()
 				.addFilter(new JwtAuthenticationFilter(authenticationManager())); // 添加JWT认证过滤器
