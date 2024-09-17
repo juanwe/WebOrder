@@ -22,4 +22,8 @@ public interface OrderMapper {
 	// 查询所有订单
 	@Select("SELECT * FROM `Order`")
 	List<Order> getAllOrders();
+	
+	// 根据用户ID查询订单
+	@Select("SELECT * FROM `Order` WHERE UserID = #{userId}")
+	List<Order> getOrdersByUserId(Integer userId);
 }

@@ -23,6 +23,11 @@ public interface ProductMapper {
 	@Select("SELECT * FROM Product")
 	List<Product> getAllProducts();
 	
+	// 查询分页的产品列表
+	@Select("SELECT * FROM Product LIMIT #{pageSize} OFFSET #{offset}")
+	List<Product> getProductsByPage(@Param("pageSize") int pageSize, @Param("offset") int offset);
+	
+	
 	// 更新产品信息
 	@Update("UPDATE Product SET ProductName = #{productName}, Price = #{price}, Description = #{description}, Shipping = #{shipping}, Weight = #{weight}, Image = #{image}, Stock = #{stock} WHERE ProductID = #{productId}")
 	void updateProduct(Product product);

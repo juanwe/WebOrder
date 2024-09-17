@@ -56,4 +56,9 @@ public class OrderServiceImpl implements OrderService {
 			productService.reduceProductStock(item.getProductId(), item.getQuantity());
 		}
 	}
+	
+	@Override
+	public List<Order> getOrderHistoryByUserId(Integer userId) {
+		return orderMapper.getOrdersByUserId(userId);
+	}
 }

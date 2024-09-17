@@ -29,6 +29,14 @@ public interface ProductService {
 	List<Product> getAllProducts();
 	
 	/**
+	 * 获取分页的产品列表
+	 *
+	 * @param pageNumber	页码
+	 * @param pageSize		页容量
+	 */
+	List<Product> getProductsByPage(int pageNumber, int pageSize);
+	
+	/**
 	 * 更新产品信息
 	 *
 	 * @param product 要更新的产品信息

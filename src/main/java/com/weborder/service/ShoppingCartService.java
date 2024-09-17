@@ -50,4 +50,20 @@ public interface ShoppingCartService {
 	 * @return 返回购物车项目列表
 	 */
 	List<CartItem> getCartItemsByCartId(Integer cartId);
+	
+	/**
+	 * 添加项目到购物车并更新购物车
+	 *
+	 * @param cartId	购物车ID
+	 * @param cartItem	物品项
+	 */
+	void addItemToCart(Integer cartId,CartItem cartItem);
+	
+	/**
+	 * 从购物车中删除项目并更新购物车
+	 *
+	 * @param cartId	购物车ID
+	 * @param itemId	物品项ID
+	 */
+	void removeItemFromCart(Integer cartId,Integer itemId);
 }

@@ -19,6 +19,9 @@ public interface CartItemMapper {
 	@Select("SELECT * FROM CartItem WHERE CartID = #{cartId}")
 	List<CartItem> getCartItemsByCartId(Integer cartId);
 	
+	// 根据项目ID查询项目
+	@Select("SELECT * FROM cartitem where ItemID = #{cartId}")
+	CartItem getCartItemById(Integer cartId);
 	// 更新购物篮项目
 	@Update("UPDATE CartItem SET Quantity = #{quantity} WHERE ItemID = #{itemId}")
 	void updateCartItem(CartItem cartItem);
@@ -26,4 +29,8 @@ public interface CartItemMapper {
 	// 删除购物篮项目
 	@Delete("DELETE FROM CartItem WHERE ItemID = #{itemId}")
 	void deleteCartItem(Integer itemId);
+	
+	//根据购物篮ID删除项目
+	@Delete("DELETE FROM cartitem where CartID = #{cartId}")
+	void deleteCartItemsByCartId(Integer cartId);
 }

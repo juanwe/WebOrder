@@ -27,4 +27,9 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<Review> getReviewsByProductId(Integer productId) {
 		return reviewMapper.getReviewsByProductId(productId);
 	}
+	
+	@Override
+	public Review getUserReviewForProduct(Integer userId, Integer productId) {
+		return reviewMapper.getUserReviewForProduct(userId,productId);
+	}
 }

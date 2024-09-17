@@ -18,4 +18,8 @@ public interface ReviewMapper {
 	// 根据产品ID查询评价
 	@Select("SELECT * FROM Review WHERE ProductID = #{productId}")
 	List<Review> getReviewsByProductId(Integer productId);
+	
+	//根据用户ID和产品ID获取用户对产品的评价
+	@Select("SELECT * FROM review where UserID = #{userId} and ProductID= #{productId}")
+	Review getUserReviewForProduct(Integer userId, Integer productId);
 }

@@ -35,6 +35,12 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public List<Product> getProductsByPage(int pageNumber, int pageSize) {
+		int offset = (pageNumber - 1) * pageSize;
+		return productMapper.getProductsByPage(pageSize, offset);
+	}
+	
+	@Override
 	public void updateProduct(Product product) {
 		productMapper.updateProduct(product);
 	}

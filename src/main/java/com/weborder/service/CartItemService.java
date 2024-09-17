@@ -22,6 +22,13 @@ public interface CartItemService {
 	List<CartItem> getCartItemsByCartId(Integer cartId);
 	
 	/**
+	 * 根据ID查询项目
+	 *
+	 * @param itemId 项目ID
+	 * @return 返回对应项信息
+	 */
+	CartItem getCartItemById(Integer itemId);
+	/**
 	 * 更新购物车项目
 	 *
 	 * @param cartItem 要更新的购物车项目
@@ -34,4 +41,10 @@ public interface CartItemService {
 	 * @param itemId 购物车项目ID
 	 */
 	void deleteCartItem(Integer itemId);
+	
+	/**
+	 * 根据购物车ID删除项目
+	 * @param cartId 购物车ID
+	 */
+	void deleteCartItemsByCartId(Integer cartId);
 }

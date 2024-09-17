@@ -29,6 +29,11 @@ public class CartItemServiceImpl implements CartItemService {
 	}
 	
 	@Override
+	public CartItem getCartItemById(Integer itemId) {
+		return cartItemMapper.getCartItemById(itemId);
+	}
+	
+	@Override
 	public void updateCartItem(CartItem cartItem) {
 		cartItemMapper.updateCartItem(cartItem);
 	}
@@ -36,5 +41,10 @@ public class CartItemServiceImpl implements CartItemService {
 	@Override
 	public void deleteCartItem(Integer itemId) {
 		cartItemMapper.deleteCartItem(itemId);
+	}
+	
+	@Override
+	public void deleteCartItemsByCartId(Integer cartId) {
+	cartItemMapper.deleteCartItemsByCartId(cartId);
 	}
 }

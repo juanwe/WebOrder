@@ -30,12 +30,12 @@ public class UserAccountController {
 		return ResponseEntity.ok().build();
 	}
 	
-	// 用户登录验证
+	/*// 用户登录验证
 	@PostMapping("/login")
 	public ResponseEntity<Boolean> login(@RequestParam String username, @RequestParam String password) {
 		boolean isValid = userAccountService.validateUserCredentials(username, password);
 		return ResponseEntity.ok(isValid);
-	}
+	}*/
 	
 	// 根据ID获取用户信息
 	@GetMapping("/{userId}")

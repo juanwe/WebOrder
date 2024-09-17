@@ -33,6 +33,13 @@ public class ProductController {
 		return ResponseEntity.ok(products);
 	}
 	
+	// 分页获取产品列表
+	@GetMapping("/page")
+	public ResponseEntity<List<Product>> getProductsByPage(@RequestParam int pageNumber, @RequestParam int pageSize) {
+		List<Product> products = productService.getProductsByPage(pageNumber, pageSize);
+		return ResponseEntity.ok(products);
+	}
+	
 	// 根据ID获取产品详情
 	@GetMapping("/{productId}")
 	public ResponseEntity<Product> getProductById(@PathVariable Integer productId) {
@@ -63,6 +70,7 @@ public class ProductController {
 	}
 	
 	// 增加产品库存
+	// 未完善的需求
 	@PutMapping("/{productId}/increase-stock")
 	public ResponseEntity<Void> increaseProductStock(@PathVariable Integer productId, @RequestParam Integer quantity) {
 		productService.increaseProductStock(productId, quantity);
