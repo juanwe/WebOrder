@@ -2,11 +2,15 @@ package com.weborder.controller;
 
 import com.weborder.entity.UserAccount;
 import com.weborder.service.UserAccountService;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -14,6 +18,8 @@ import java.util.List;
 public class UserAccountController {
 	
 	private final UserAccountService userAccountService;
+	
+	private final String jwtSecret = "SecretKeyToGenJWTs"; // JWT密钥
 	
 	@Autowired
 	public UserAccountController(UserAccountService userAccountService) {
@@ -27,12 +33,26 @@ public class UserAccountController {
 		return ResponseEntity.ok().build();
 	}
 	
-	/*// 用户登录验证
+	// 用户登录验证
 	@PostMapping("/login")
-	public ResponseEntity<Boolean> login(@RequestParam String username, @RequestParam String password) {
+	public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
+		// 验证用户凭据
 		boolean isValid = userAccountService.validateUserCredentials(username, password);
-		return ResponseEntity.ok(isValid);
-	}*/
+		
+		if (!isValid) {
+			return ResponseEntity.status(401).body("Invalid credentials");
+		}
+		
+		// 如果用户凭据正确，生成JWT
+		String token = Jwts.builder()
+				.setSubject(username)
+				.setExpiration(new Date(System.currentTimeMillis() + 864_000_000)) // 10天有效
+				.signWith(SignatureAlgorithm.HS512, jwtSecret)
+				.compact();
+		
+		// 返回JWT给客户端
+		return ResponseEntity.ok(token);
+	}
 	
 	// 根据ID获取用户信息
 	@GetMapping("/{userId}")
