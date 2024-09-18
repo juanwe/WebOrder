@@ -10,12 +10,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig /*extends WebSecurityConfigurerAdapter*/ {
 	
-	@Override
+	/*@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 				.exceptionHandling()
@@ -28,10 +29,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated() // 其他所有请求都需要认证
 				.and()
 				.addFilter(new JwtAuthenticationFilter(authenticationManager())); // 添加JWT认证过滤器
-	}
+	}*/
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http
+				.csrf().disable()  // 禁用 CSRF 保护
+				.authorizeRequests()
+				.anyRequest().permitAll()  // 允许所有请求，无需身份验证
+				.and()
+				.httpBasic().disable();  // 禁用基本认证
+		return http.build();
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/carts")
 public class ShoppingCartController {
@@ -25,9 +26,9 @@ public class ShoppingCartController {
 	
 	// 创建新购物车
 	@PostMapping
-	public ResponseEntity<Void> createCart(@RequestBody ShoppingCart cart) {
+	public ResponseEntity<Integer> createCart(@RequestBody ShoppingCart cart) {
 		shoppingCartService.createCart(cart);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(cart.getCartId());  // 返回创建的购物车ID
 	}
 	
 	// 获取购物车详情
@@ -42,6 +43,13 @@ public class ShoppingCartController {
 	public ResponseEntity<List<CartItem>> getCartItemsByCartId(@PathVariable Integer cartId) {
 		List<CartItem> cartItems = cartItemService.getCartItemsByCartId(cartId);
 		return ResponseEntity.ok(cartItems);
+	}
+	
+	// 增加项目到购物车
+	@PutMapping("/{cartId}/add")
+	public ResponseEntity<Void> addItemToCart(@PathVariable Integer cartId,@RequestBody CartItem cartItem){
+		shoppingCartService.addItemToCart(cartId,cartItem);
+		return ResponseEntity.ok().build();
 	}
 	
 	// 更新购物车

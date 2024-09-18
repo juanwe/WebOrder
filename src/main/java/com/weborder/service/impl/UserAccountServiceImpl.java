@@ -13,17 +13,17 @@ import java.util.List;
 public class UserAccountServiceImpl implements UserAccountService {
 	
 	private final UserAccountMapper userAccountMapper;
-	private final PasswordEncoder passwordEncoder;
+	//private final PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	public UserAccountServiceImpl(UserAccountMapper userAccountMapper,PasswordEncoder passwordEncoder) {
+	public UserAccountServiceImpl(UserAccountMapper userAccountMapper) {
 		this.userAccountMapper = userAccountMapper;
-		this.passwordEncoder = passwordEncoder;
+		//this.passwordEncoder = passwordEncoder;
 	}
 	
 	@Override
 	public void createUser(UserAccount userAccount) {
-		userAccount.setPassword(passwordEncoder.encode(userAccount.getPassword()));
+		//userAccount.setPassword(passwordEncoder.encode(userAccount.getPassword()));
 		userAccountMapper.insertUser(userAccount);
 	}
 	
