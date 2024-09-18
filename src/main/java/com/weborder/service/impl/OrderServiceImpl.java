@@ -2,7 +2,6 @@ package com.weborder.service.impl;
 
 import com.weborder.dao.OrderItemMapper;
 import com.weborder.dao.OrderMapper;
-import com.weborder.dao.ProductMapper;
 import com.weborder.entity.Order;
 import com.weborder.entity.OrderItem;
 import com.weborder.service.OrderService;
@@ -35,6 +34,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Order getOrderById(Integer orderId) {
 		return orderMapper.getOrderById(orderId);
+	}
+	
+	@Override
+	public List<OrderItem> getOrderItemsByOrderId(Integer orderId){
+		return orderItemMapper.getOrderItemsByOrderId(orderId);
 	}
 	
 	@Override

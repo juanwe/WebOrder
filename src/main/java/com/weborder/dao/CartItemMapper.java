@@ -11,7 +11,7 @@ import java.util.List;
 public interface CartItemMapper {
 	
 	// 插入购物篮项目
-	@Insert("INSERT INTO CartItem(CartID, ProductID, Quantity) VALUES(#{cartId}, #{productId}, #{quantity})")
+	@Insert("INSERT INTO CartItem(CartID, ProductID, Quantity,Price,ProductWeight) VALUES(#{cartId}, #{productId}, #{quantity}, #{price},#{productWeight})")
 	@Options(useGeneratedKeys = true, keyProperty = "itemId")
 	void insertCartItem(CartItem cartItem);
 	

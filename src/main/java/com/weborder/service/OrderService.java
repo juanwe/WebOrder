@@ -22,6 +22,8 @@ public interface OrderService {
 	 */
 	Order getOrderById(Integer orderId);
 	
+	List<OrderItem> getOrderItemsByOrderId(Integer orderId);
+	
 	/**
 	 * 获取所有订单
 	 *

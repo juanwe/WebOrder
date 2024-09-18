@@ -36,6 +36,13 @@ public class OrderController {
 		return ResponseEntity.ok(order);
 	}
 	
+	// 根据订单ID查询订单项
+	@GetMapping("/details/{orderId}")
+	public ResponseEntity<List<OrderItem>> getOrderItemsByOrderId(@PathVariable Integer orderId){
+		List<OrderItem> orderItems = orderService.getOrderItemsByOrderId(orderId);
+		return ResponseEntity.ok(orderItems);
+	}
+	
 	// 获取用户的订单历史
 	@GetMapping("/user/{userId}")
 	public ResponseEntity<List<Order>> getOrderHistoryByUserId(@PathVariable Integer userId) {

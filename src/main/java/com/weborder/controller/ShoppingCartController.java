@@ -52,6 +52,13 @@ public class ShoppingCartController {
 		return ResponseEntity.ok().build();
 	}
 	
+	// 在购物车中删除项目
+	@PutMapping("/{cartId}/remove/{itemId}")
+	public ResponseEntity<Void> removeItemToCart(@PathVariable Integer cartId, @PathVariable Integer itemId){
+		shoppingCartService.removeItemFromCart(cartId,itemId);
+		return ResponseEntity.ok().build();
+	}
+	
 	// 更新购物车
 	@PutMapping("/{cartId}")
 	public ResponseEntity<Void> updateCart(@PathVariable Integer cartId, @RequestBody ShoppingCart cart) {

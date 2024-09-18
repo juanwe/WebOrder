@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -40,6 +41,9 @@ public class ReviewController {
 	@GetMapping("/product/{productId}")
 	public ResponseEntity<List<Review>> getReviewsByProductId(@PathVariable Integer productId) {
 		List<Review> reviews = reviewService.getReviewsByProductId(productId);
+		if (reviews == null || reviews.isEmpty()) {
+			return ResponseEntity.status(404).body(Collections.emptyList());  // 如果没有评论，返回空列表
+		}
 		return ResponseEntity.ok(reviews);
 	}
 	
